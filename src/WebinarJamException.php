@@ -1,5 +1,5 @@
 <?php
-namespace Jandje\WebinarJam;
+namespace App\Acme;
 
 use Exception;
 

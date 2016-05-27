@@ -1,5 +1,5 @@
 <?php 
-namespace Jandje\WebinarJam;
+namespace App\Acme;
 
 class JandjeWebinarJam {
 
@@ -11,19 +11,14 @@ class JandjeWebinarJam {
      * Create a new instance
      * @param string $api_key Your WebinarJam API key
      */
-    public function __construct($api_key)
+    public function __construct()
     {
-        $this->api_key = $api_key;
+        $this->api_key = env('WJ_KEY');
     }
 
-    // public function post($method, $args=array(), $timeout=10)
-    // {
-    //     return $this->makeRequest('post', $method, $args, $timeout);
-    // }
-
-    public function getWebinars($method, $args=array(), $timeout=10)
+    public function getAllWebinars($method, $args=array(), $timeout=10)
     {
-    	return $this->makeRequest('getwebinars', $method, $args, $timeout);
+    	return $this->makeRequest('getallwebinars', $method, $args, $timeout);
     }
 
     public function registerToWebinar($method, $args=array(), $timeout=10)
@@ -41,9 +36,6 @@ class JandjeWebinarJam {
      */
     private function makeRequest($http_verb, $method, $args=array(), $timeout=10)
     {
-        // $url = $this->api_endpoint.'/'.$method;
-
-        // $json_data = json_encode($args, JSON_FORCE_OBJECT);
 
         if (function_exists('curl_init') && function_exists('curl_setopt')) {
             $ch = curl_init();
@@ -55,7 +47,7 @@ class JandjeWebinarJam {
 
 
             switch($http_verb) {
-                case 'getwebinars':
+                case 'getallwebinars':
                 	$url = $this->endpoint.'/'.$method.'?api_key='.$this->api_key;
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_POST, true);

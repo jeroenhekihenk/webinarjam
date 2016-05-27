@@ -1,5 +1,5 @@
 <?php
-namespace Jandje\WebinarJam;
+namespace App\Acme;
 
 use Exception;
 use Log;
@@ -18,10 +18,10 @@ class WebinarJam
      * @return string
      * @throws WebinarJamException
      */
-    public function getWebinars()
+    public function getAllWebinars()
     {
         $endpoint = 'webinars';
-        $response = $this->callApi('getwebinars', $endpoint);
+        $response = $this->callApi('getallwebinars', $endpoint);
         return $response;
     }
 
@@ -56,52 +56,6 @@ class WebinarJam
         $response = $this->callApi('registertowebinar', $endpoint, $data);
         return $response;
     }
-
-    /**
-     * Checks to see if an email address is subscribed to a list
-     * Need to check the list exists first, because the response for non-existent list ID
-     * and for a non-subscriber is the same
-     * @param string $listId
-     * @param string $emailAddress
-     * @return bool
-     * @throws MailchimpException
-     */
-    public function check($listId, $emailAddress)
-    {
-        $result = $this->checkStatus($listId, $emailAddress);
-        if($result == 'subscribed' || $result == 'pending') {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Checks the status of a list subscriber
-     * Possible statuses: 'subscribed', 'unsubscribed', 'cleaned', 'pending', or 'not found'
-     * @param $listId
-     * @param $emailAddress
-     * @return string
-     * @throws MailchimpException
-     */
-    public function checkStatus($listId, $emailAddress)
-    {
-        // Check the list exists
-        if(!$this->checkListExists($listId)) {
-            throw new MailchimpException('checkStatus called on a list that does not exist (' . $listId . ')');
-        }
-        // Check whether the list has the subscriber
-        $id = md5(strtolower($emailAddress));
-        $endpoint = "lists/{$listId}/members/{$id}";
-        $response = $this->callApi('get', $endpoint);
-        if (empty($response['status'])) {
-            throw new MailchimpException('checkStatus return value did not contain status');
-        }
-        if ($response['status'] == 404) {
-            $response['status'] = 'not found';
-        }
-        return $response['status'];
-    }
-
 
     /**
      * @param $method
