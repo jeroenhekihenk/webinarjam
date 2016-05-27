@@ -27,14 +27,14 @@ class JandjeWebinarJam {
     }
 
     /**
-     * Performs the underlying HTTP request. Not very exciting
-     * @param  string $http_verb   The HTTP verb to use: get, post, put, patch, delete
+     * Performs the underlying API request. Not very exciting
+     * @param  string $var          The var to use: getallwebinars, registertowebinar
      * @param  string $method       The API method to be called
      * @param  array  $args         Assoc array of parameters to be passed
      * @return array|boolean        Assoc array of decoded result
      * @throws
      */
-    private function makeRequest($http_verb, $method, $args=array(), $timeout=10)
+    private function makeRequest($var, $method, $args=array(), $timeout=10)
     {
 
         if (function_exists('curl_init') && function_exists('curl_setopt')) {
@@ -46,7 +46,7 @@ class JandjeWebinarJam {
             curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0);
 
 
-            switch($http_verb) {
+            switch($var) {
                 case 'getallwebinars':
                     $url = $this->endpoint.'/'.$method.'?api_key='.$this->api_key;
                     curl_setopt($ch, CURLOPT_URL, $url);
