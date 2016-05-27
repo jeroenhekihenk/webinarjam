@@ -12,16 +12,12 @@ class WebinarJamServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(WebinarJam::class, function() {
-            return new WebinarJam(new JandjeWebinarJam());
+            return new WebinarJam(new JandjeWebinarJam(env('WJ_KEY')));
         });
     }
 
     public function register()
-    {
-        $this->publishes([
-            __DIR__.'config/webinarjam.php' => config_path('webinarjam.php'),
-        ]);
-        
+    {       
         $this->app->bind('webinarjam', function() {
             return $this->app->make(WebinarJam::class);
         });

@@ -3,27 +3,27 @@ namespace Jeroenhekihenk\Webinarjam;
 
 class JandjeWebinarJam {
 
-	private $api_key;
-	private $endpoint = 'https://app.webinarjam.com/api/v2';
-	private $verify_ssl = true;
+    private $api_key;
+    private $endpoint = 'https://app.webinarjam.com/api/v2';
+    private $verify_ssl = true;
 
-	/**
+    /**
      * Create a new instance
      * @param string $api_key Your WebinarJam API key
      */
-    public function __construct()
+    public function __construct($api_key)
     {
-        $this->api_key = env('WJ_KEY');
+        $this->api_key = $api_key;
     }
 
     public function getAllWebinars($method, $args=array(), $timeout=10)
     {
-    	return $this->makeRequest('getallwebinars', $method, $args, $timeout);
+        return $this->makeRequest('getallwebinars', $method, $args, $timeout);
     }
 
     public function registerToWebinar($method, $args=array(), $timeout=10)
     {
-    	return $this->makeRequest('registertowebinar', $method, $args, $timeout);
+        return $this->makeRequest('registertowebinar', $method, $args, $timeout);
     }
 
     /**
@@ -48,13 +48,13 @@ class JandjeWebinarJam {
 
             switch($http_verb) {
                 case 'getallwebinars':
-                	$url = $this->endpoint.'/'.$method.'?api_key='.$this->api_key;
+                    $url = $this->endpoint.'/'.$method.'?api_key='.$this->api_key;
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_POST, true);
                     break;
 
                 case 'registertowebinar':
-		            $url = $this->endpoint.'/'.$method.'?api_key='.$this->api_key.'&webinar_id='.$args['webinar_id'].'&name='.$args['name'].'&email='.$args['email'].'&schedule='.$args['schedule'];
+                    $url = $this->endpoint.'/'.$method.'?api_key='.$this->api_key.'&webinar_id='.$args['webinar_id'].'&name='.$args['name'].'&email='.$args['email'].'&schedule='.$args['schedule'];
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_POST, true);
                     break;
