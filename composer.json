@@ -1,0 +1,21 @@
+{
+    "name": "jeroenhekihenk/webinarjam",
+    "description": "Webinarjam API",
+    "license": "MIT",
+    "keywords": ["laravel","webinar","webinarjam"],
+    "authors": [
+    	{
+    		"name": "Jeroen Venderbosch",
+    		"email": "jeroen@digitusmarketing.nl"
+    	}
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "^5.2"
+    },
+    "autoload": {
+    	"psr-4": {
+    		"Jandje\\Webinarjam\\": "src/"
+    	}
+    }
+}
