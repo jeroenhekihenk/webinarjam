@@ -37,6 +37,14 @@ class WebinarJam
      */
     public function registerToWebinar($webinarId, $name, $email, $schedule)
     {
+        // TODO
+        // TEST TEST TEST TEST TEST
+        // TEST TEST TEST TEST
+        // TEST TEST TEST
+        // TEST TEST
+        // TEST
+
+
         $endpoint = 'register';
 
         $data = [];
