@@ -9,7 +9,6 @@
     		"email": "jeroen@digitusmarketing.nl"
     	}
     ],
-    "minimum-stability": "dev",
     "require": {
         "illuminate/support": "^5.2"
     },
