@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace jeroenhekihenk\webinarjam;
 
 use App;
 use Illuminate\Support\ServiceProvider;

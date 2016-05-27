@@ -1,5 +1,5 @@
 <?php 
-namespace App\Acme;
+namespace jeroenhekihenk\webinarjam;
 
 class JandjeWebinarJam {
 
